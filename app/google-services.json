@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "810228364272",
+    "firebase_url": "https://langlearner-2b734.firebaseio.com",
+    "project_id": "langlearner-2b734",
+    "storage_bucket": "langlearner-2b734.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:810228364272:android:2b84098a5437e7705ce335",
+        "android_client_info": {
+          "package_name": "io.sks.langlearner.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "810228364272-m1teqj3sv0cst9j4i8biei4nn6181igf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.sks.langlearner.android",
+            "certificate_hash": "a9cbbf00bbfc14e4bc4e9a29828e88f48efcfcc9"
+          }
+        },
+        {
+          "client_id": "810228364272-63ro2gqd6u0cf5ak6e7e3hgqiv4ru94d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDR4KGyQgqCTIT9pDYJCmCD3psd_xuWEM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "810228364272-63ro2gqd6u0cf5ak6e7e3hgqiv4ru94d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
