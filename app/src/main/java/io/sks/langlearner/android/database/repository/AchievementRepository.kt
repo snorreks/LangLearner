@@ -14,8 +14,9 @@ class AchievementRepository(private val achievementFirestoreDao: AchievementFire
 
     suspend fun updateAchievement(langCard: LangCard) {
         val selectedAchievements =
-            achievements.value?.filter { achievement -> achievement.category == langCard.type }
-        selectedAchievements?.forEach { achievement ->
+            achievementFirestoreDao.getAllAchievementsFuture()
+                .filter { achievement -> achievement.category == langCard.type || achievement.category == "common" }
+        selectedAchievements.forEach { achievement ->
             achievementFirestoreDao.updateAchievement(achievement)
         }
     }

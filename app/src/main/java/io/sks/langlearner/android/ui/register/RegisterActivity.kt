@@ -12,8 +12,8 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import io.sks.langlearner.android.MainActivity
 import io.sks.langlearner.android.R
+import io.sks.langlearner.android.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_register.*
 
 
@@ -27,16 +27,17 @@ class RegisterActivity : AppCompatActivity() {
         initViews()
         initViewModel()
     }
+
     private fun initViews() {
         etEmail.afterTextChanged {
-            registerViewModel.loginDataChanged(
+            registerViewModel.registerDataChanged(
                 etEmail.text.toString(),
                 etPassword.text.toString()
-                )
+            )
         }
         etPassword.apply {
             afterTextChanged {
-                registerViewModel.loginDataChanged(
+                registerViewModel.registerDataChanged(
                     etEmail.text.toString(),
                     etPassword.text.toString()
                 )
@@ -44,37 +45,46 @@ class RegisterActivity : AppCompatActivity() {
         }
         btnSignUp.setOnClickListener {
             loading.visibility = View.VISIBLE
-            registerViewModel.register(etEmail.text.toString(), etPassword.text.toString(),
-                spinNativeLang.selectedItemPosition ,spinSelectedLang.selectedItemPosition
-                )
+            registerViewModel.register(
+                etEmail.text.toString(), etPassword.text.toString(),
+                spinNativeLang.selectedItemPosition, spinSelectedLang.selectedItemPosition
+            )
         }
+
+        btnCancel.setOnClickListener {
+            setResult(Activity.RESULT_OK)
+            finish()
+        }
+
+
     }
+
     private fun initViewModel() {
 
         registerViewModel =
             ViewModelProviders.of(this).get(RegisterViewModel::class.java)
 
         registerViewModel.registerFormState.observe(this@RegisterActivity, Observer {
-            val loginState = it ?: return@Observer
+            val registerState = it ?: return@Observer
 
             // disable login button unless both username / password is valid
-            btnSignUp.isEnabled = loginState.isDataValid
+            btnSignUp.isEnabled = registerState.isDataValid
 
-            if (loginState.usernameError != null) {
-                etEmail.error = getString(loginState.usernameError)
+            if (registerState.emailError != null) {
+                etEmail.error = getString(registerState.emailError)
             }
-            if (loginState.passwordError != null) {
-                etPassword.error = getString(loginState.passwordError)
+            if (registerState.passwordError != null) {
+                etPassword.error = getString(registerState.passwordError)
             }
         })
 
         registerViewModel.registerResult.observe(this@RegisterActivity, Observer {
-            val loginResult = it ?: return@Observer
+            val registerResult = it ?: return@Observer
             loading.visibility = View.GONE
-            if (loginResult.error != null) {
-                showRegisterFailed(loginResult.error)
+            if (registerResult.error != null) {
+                showRegisterFailed(registerResult.error)
             }
-            if (loginResult.success) {
+            if (registerResult.success) {
                 setResult(Activity.RESULT_OK)
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()

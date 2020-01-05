@@ -1,6 +1,5 @@
 package io.sks.langlearner.android.ui.achievements
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,15 +31,17 @@ class AchievementsAdapter(
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val tvTitle: TextView = view.findViewById(R.id.tvTitle)
         private val tvDescription: TextView = view.findViewById(R.id.tvDescription)
+        private val tvAchievedAt: TextView = view.findViewById(R.id.tvAchievedAt)
+
         private val ivThumbnail: ImageView = view.findViewById(R.id.ivThumbnail)
 
         fun bind(achievement: Achievement) {
-            Log.d("aa", achievement.title)
             Glide.with(ivThumbnail)
                 .load(achievement.thumbnailUrl)
                 .into(ivThumbnail)
             tvTitle.text = achievement.title
             tvDescription.text = achievement.description
+            tvAchievedAt.text = achievement.achievedAt?.toString()
         }
 
     }

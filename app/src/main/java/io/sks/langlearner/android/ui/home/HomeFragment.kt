@@ -20,7 +20,9 @@ class HomeFragment : Fragment() {
 
     private val langCards = arrayListOf<LangCard>()
     private val langCardsAdapter =
-        LangCardAdapter(langCards, {langCard, resultText -> homeViewModel.addHistory(langCard,resultText)}, {langCard -> homeViewModel.updateAchievment(langCard)})
+        LangCardAdapter(
+            langCards,
+            { langCard, resultText -> homeViewModel.submit(langCard, resultText) })
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

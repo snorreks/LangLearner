@@ -31,12 +31,13 @@ class HistoryAdapter(private val histories: List<History>) :
         private val tvResult: TextView = itemView.findViewById(R.id.tvResult)
         private val tvSelectedText: TextView = itemView.findViewById(R.id.tvSelectedText)
         private val tvNativeText: TextView = itemView.findViewById(R.id.tvNativeText)
+        private val tvDate: TextView = itemView.findViewById(R.id.tvDate)
 
         fun bind(history: History) {
             tvResult.text = history.resultText
             tvSelectedText.text = history.selectedText
             tvNativeText.text = history.nativeText
-            //  tvReminder.text = history.resultText
+            tvDate.text = history.createdAt.toString()
         }
     }
 }

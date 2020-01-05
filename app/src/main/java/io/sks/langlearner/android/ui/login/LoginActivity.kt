@@ -13,8 +13,8 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import io.sks.langlearner.android.MainActivity
 import io.sks.langlearner.android.R
+import io.sks.langlearner.android.ui.main.MainActivity
 import io.sks.langlearner.android.ui.register.RegisterActivity
 import kotlinx.android.synthetic.main.activity_login.*
 

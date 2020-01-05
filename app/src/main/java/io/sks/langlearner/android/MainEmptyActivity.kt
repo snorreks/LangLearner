@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import io.sks.langlearner.android.services.FirebaseAuthService.getUserData
 import io.sks.langlearner.android.ui.login.LoginActivity
+import io.sks.langlearner.android.ui.main.MainActivity
 import io.sks.langlearner.android.util.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

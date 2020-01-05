@@ -20,7 +20,7 @@ class AchievementFirestoreDao {
     fun getAllAchievements(): LiveData<List<Achievement>> {
         val achievements: MutableLiveData<List<Achievement>> = MutableLiveData()
         db.collection("users").document(auth.currentUser!!.uid)
-            .collection("achievements")
+            .collection("achievements").orderBy("goalCount")
             .addSnapshotListener(EventListener<QuerySnapshot> { value, e ->
                 if (e != null) {
                     achievements.value = null
@@ -55,6 +55,17 @@ class AchievementFirestoreDao {
         } catch (e: FirebaseException) {
             ActionResult(error = 0)
         }
+    }
+
+    suspend fun getAllAchievementsFuture(): List<Achievement> {
+        val achievementsQuery = db.collection("users").document(auth.currentUser!!.uid)
+            .collection("achievements").get().await()
+        val achievements: MutableList<Achievement> = mutableListOf()
+        for (doc in achievementsQuery.documents) {
+            val achievement = doc.toObject(Achievement::class.java)!!.withId(doc.id)
+            achievements.add(achievement)
+        }
+        return achievements
     }
 }
 

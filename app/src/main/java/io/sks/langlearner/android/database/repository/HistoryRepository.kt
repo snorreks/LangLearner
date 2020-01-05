@@ -4,9 +4,6 @@ import androidx.lifecycle.LiveData
 import io.sks.langlearner.android.database.room.HistoryRoomDao
 import io.sks.langlearner.android.database.room.LangLearnerRoomDatabase
 import io.sks.langlearner.android.model.History
-import io.sks.langlearner.android.model.LangCard
-import io.sks.langlearner.android.services.FirebaseAuthService.currentUser
-import java.util.*
 
 
 class HistoryRepository(context: Context) {
@@ -21,11 +18,7 @@ class HistoryRepository(context: Context) {
         return historyRoomDao.getAllHistories()
     }
 
-    suspend fun insertHistory(langCard: LangCard, resultText: String) {
-        val historyId: String = UUID.randomUUID().toString()
-        val nativeText = currentUser!!.getNativeText(langCard.text)
-        val selectedText = currentUser!!.getNativeText(langCard.text)
-        val history = History(historyId,nativeText,selectedText,resultText)
+    suspend fun insertHistory(history: History) {
         historyRoomDao.insertHistory(history)
     }
     suspend fun deleteHistory(history: History) {

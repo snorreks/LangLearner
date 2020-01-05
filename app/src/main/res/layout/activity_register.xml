@@ -15,8 +15,6 @@
         style="@style/Widget.MaterialComponents.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:minHeight="150dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,9 +23,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:dividerPadding="30dp"
+            android:gravity="center"
             android:orientation="vertical">
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -41,6 +44,10 @@
                     android:inputType="textEmailAddress"
                     android:selectAllOnFocus="true" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="2dp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -59,20 +66,57 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/spinNativeLang"
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="2dp" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/language_arrays"
-                android:prompt="@string/prompt_select_native_language" />
+                android:weightSum="10">
 
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/spinSelectedLang"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="@string/prompt_select_native_language" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinNativeLang"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:entries="@array/language_arrays"
+                    android:prompt="@string/prompt_select_native_language" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="2dp" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/language_arrays"
-                android:prompt="@string/prompt_select_selected_language" />
+                android:weightSum="10">
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="@string/prompt_select_selected_language" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinSelectedLang"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:entries="@array/language_arrays"
+                    android:prompt="@string/prompt_select_selected_language" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="2dp" />
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSignUp"
                 android:layout_width="match_parent"
@@ -86,7 +130,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:text="@string/action_sign_up" />
+                android:text="@string/action_cancel" />
 
             <ProgressBar
                 android:id="@+id/loading"

@@ -58,6 +58,24 @@ object FirebaseAuthService {
              Result.Error(e)
         }
     }
+
+    suspend fun updateLocales(nativeLocale: String, selectedLocale: String): Result<Boolean> {
+        return try {
+            db.collection("users").document(auth.currentUser!!.uid).update(
+                mapOf(
+                    "nativeLang" to nativeLocale,
+                    "selectedLang" to selectedLocale,
+                    "updatedAt" to FieldValue.serverTimestamp()
+                )
+            ).await()
+            currentUser!!.nativeLocale = nativeLocale
+            currentUser!!.selectedLocale = selectedLocale
+            Result.Success(true)
+        } catch (e: FirebaseException) {
+            Result.Error(e)
+        }
+    }
+
      fun signOut(){
         auth.signOut()
     }

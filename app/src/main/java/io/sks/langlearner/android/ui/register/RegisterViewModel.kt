@@ -46,9 +46,10 @@ class RegisterViewModel : ViewModel() {
         }
     }
 
-    fun loginDataChanged(username: String, password: String) {
-        if (!isUserNameValid(username)) {
-            _registerForm.value = RegisterFormState(usernameError = R.string.invalid_username)
+
+    fun registerDataChanged(username: String, password: String) {
+        if (!isEmailNameValid(username)) {
+            _registerForm.value = RegisterFormState(emailError = R.string.invalid_email)
         } else if (!isPasswordValid(password)) {
             _registerForm.value = RegisterFormState(passwordError = R.string.invalid_password)
         } else {
@@ -56,16 +57,14 @@ class RegisterViewModel : ViewModel() {
         }
     }
 
-    // A placeholder username validation check
-    private fun isUserNameValid(username: String): Boolean {
-        return if (username.contains('@')) {
-            Patterns.EMAIL_ADDRESS.matcher(username).matches()
+    private fun isEmailNameValid(email: String): Boolean {
+        return if (email.contains('@')) {
+            Patterns.EMAIL_ADDRESS.matcher(email).matches()
         } else {
-            username.isNotBlank()
+            email.isNotBlank()
         }
     }
 
-    // A placeholder password validation check
     private fun isPasswordValid(password: String): Boolean {
         return password.length > 5
     }

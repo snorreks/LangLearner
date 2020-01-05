@@ -10,9 +10,12 @@ import java.util.*
 @Parcelize
 @Entity
 data class History (
-    @PrimaryKey var id: String,
     var nativeText: String,
     var selectedText: String,
     var resultText: String,
-    @ServerTimestamp var createdAt: Date? = null
+    @ServerTimestamp var createdAt: Date = Date(),
+    @PrimaryKey var id: Long? = null
 ) : Parcelable
+
+
+
