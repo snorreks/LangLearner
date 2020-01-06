@@ -45,11 +45,13 @@ class LoginActivity : AppCompatActivity() {
             }
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
-                    EditorInfo.IME_ACTION_DONE ->
+                    EditorInfo.IME_ACTION_DONE -> {
+                        loading.visibility = View.VISIBLE
                         loginViewModel.login(
                             etEmail.text.toString(),
                             etPassword.text.toString()
                         )
+                    }
                 }
                 false
             }

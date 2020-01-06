@@ -5,8 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.card.MaterialCardView
 import io.sks.langlearner.android.R
 import io.sks.langlearner.android.model.LangCard
 import io.sks.langlearner.android.services.FirebaseAuthService
@@ -37,6 +39,7 @@ class LangCardAdapter(
         private val btnSubmit: Button = view.findViewById(R.id.btnSubmit)
         private val btnGiveUp: Button = view.findViewById(R.id.btnGiveUp)
         private val ivThumbnail: ImageView = view.findViewById(R.id.ivThumbnail)
+        private val card: MaterialCardView = view.findViewById(R.id.card)
 
         fun bind(langCard: LangCard) {
             val nativeText = FirebaseAuthService.currentUser!!.getNativeText(langCard.text)
@@ -51,9 +54,21 @@ class LangCardAdapter(
                     when (actionId) {
                         EditorInfo.IME_ACTION_DONE ->
                             if (submit(langCard, etResultText.text.toString())) {
+                                card.setBackgroundColor(
+                                    ContextCompat.getColor(
+                                        context,
+                                        R.color.colorSuccess
+                                    )
+                                )
                                 Toast.makeText(v.context, R.string.correct, Toast.LENGTH_SHORT)
                                     .show()
                             } else {
+                                card.setBackgroundColor(
+                                    ContextCompat.getColor(
+                                        context,
+                                        R.color.colorError
+                                    )
+                                )
                                 Toast.makeText(
                                     v.context, v.context.getString(R.string.wrong, selectedText)
                                     , Toast.LENGTH_SHORT
@@ -64,11 +79,12 @@ class LangCardAdapter(
                 }
             }
 
-
             btnSubmit.setOnClickListener { v ->
                 if (submit(langCard, etResultText.text.toString())) {
+                    card.setBackgroundColor(ContextCompat.getColor(v.context, R.color.colorSuccess))
                     Toast.makeText(v.context, R.string.correct, Toast.LENGTH_SHORT).show()
                 } else {
+                    card.setBackgroundColor(ContextCompat.getColor(v.context, R.color.colorError))
                     Toast.makeText(
                         v.context, v.context.getString(R.string.wrong, selectedText)
                         , Toast.LENGTH_SHORT
@@ -79,5 +95,8 @@ class LangCardAdapter(
                 Toast.makeText(v.context, selectedText, Toast.LENGTH_SHORT).show()
             }
         }
+
     }
+
+
 }
